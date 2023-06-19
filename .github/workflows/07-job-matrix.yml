@@ -23,9 +23,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-          
-      - name: Install tmate
-        run: apt update && apt install tmate -y
         
       - name: Print OS-release
         run: cat /etc/os-release
