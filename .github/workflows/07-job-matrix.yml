@@ -27,10 +27,6 @@ jobs:
       - name: Print OS-release
         run: cat /etc/os-release
         
-      - name: Install tmate
-        if: ${{ matrix.os == 'ubuntu-18.04' }}
-        run: apt-get update && apt-get install sudo -y && apt-get install tmate -y
-        
       - name: Run tests
         working-directory: ./07-job-matrix
         run: npm test
