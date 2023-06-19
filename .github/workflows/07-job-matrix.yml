@@ -29,7 +29,7 @@ jobs:
         
       - name: Install tmate
         if: ${{ matrix.os == 'ubuntu-18.04' }}
-        run: apt-get update && apt-get install tmate -y && apt-get install sudo -y
+        run: apt-get update && apt-get install sudo -y && apt-get install tmate -y
         
       - name: Run tests
         working-directory: ./07-job-matrix
