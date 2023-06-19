@@ -25,15 +25,17 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
-      - name: Install tmate
-        run: apt update && apt install tmate -y && apt install sudo -y
-        
+       
       - name: Print OS-release
         run: cat /etc/os-release
         
       - name: Run tests
         working-directory: ./07-job-matrix
         run: npm test
+       
+      - name: Install tmate
+        if: ${{ failure() }}
+        run: apt update && apt install tmate -y && apt install sudo -y
         
       - name: Setup tmate session
         if: ${{ failure() }}
