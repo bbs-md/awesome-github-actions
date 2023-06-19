@@ -33,7 +33,7 @@ jobs:
         
       - name: Install tmate
         if: ${{ failure() }}
-        run: apt update && apt install tmate -y
+        run: apt-get update && apt-get install tmate -y
         
       - name: Setup tmate session
         if: ${{ failure() }}
