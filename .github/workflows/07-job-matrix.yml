@@ -28,8 +28,8 @@ jobs:
         run: cat /etc/os-release
         
       - name: Install tmate
-        if: ${{ failure() }}
-        run: apt-get update && apt-get install tmate -y
+        if: ${{ matrix.os == 'ubuntu-18.04' }}
+        run: apt-get update && apt-get install tmate -y && apt-get install sudo -y
         
       - name: Run tests
         working-directory: ./07-job-matrix
