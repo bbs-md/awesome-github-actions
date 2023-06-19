@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node }}
           
       - name: Install tmate
-        run: apt update && apt install tmate -y
+        run: apt update && apt install tmate -y && apt install sudo -y
         
       - name: Print OS-release
         run: cat /etc/os-release
