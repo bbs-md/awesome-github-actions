@@ -46,3 +46,7 @@ jobs:
       run: |
         k3d cluster delete demo-cluster
         docker system prune -f -a
+        
+    - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3.11
