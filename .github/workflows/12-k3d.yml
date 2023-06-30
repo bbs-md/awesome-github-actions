@@ -24,7 +24,7 @@ jobs:
         k3d cluster create demo-cluster --registry-create demo-registry:12345 
     - name: Apply manifest
       run: |
-        kubectl apply -f ./kubernetes/05-interconnect-two-containers-via-volumes-in-k3d/manifests
+        kubectl apply -f ./12-k3d/manifests
     - name: Get logs
       run: |
         sleep 60
