@@ -28,7 +28,7 @@ jobs:
         
     - name: Add port 8085
       run: |
-        k3d cluster edit demo-cluster-1 --port-add 8085:4567@loadbalancer
+        k3d cluster edit demo-cluster --port-add 8085:4567@loadbalancer
         
     - name: Get logs
       run: |
