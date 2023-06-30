@@ -9,6 +9,13 @@ spec:
     - name: writer-container
       image: ubuntu:23.10
       command: ["sh","-c","echo 'Hello World' > /data/test.txt && echo 'The file /data/test.txt was created' && sleep infinity"]
+      livenessProbe:
+        exec:
+          command:
+          - cat
+          - /data/test.txt
+        initialDelaySeconds: 5
+        periodSeconds: 5
       volumeMounts:
         - name: data
           mountPath: /data
