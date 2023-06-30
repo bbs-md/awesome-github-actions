@@ -27,7 +27,7 @@ jobs:
         kubectl apply -f ./13-k3d-deployment/manifests
     - name: Get logs
       run: |
-        sleep 10
+        sleep 20
         kubectl get pods
         kubectl describe pods
         OUTPUT=$(curl http://localhost:8083)
