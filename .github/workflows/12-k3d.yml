@@ -31,9 +31,12 @@ jobs:
         kubectl get pods
         kubectl describe pods
         OUTPUT=$(kubectl logs 05-writer-reader -c reader-container)
+        OUTPUT1=$(kubectl logs 05-writer-reader -c writer-container)
         echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
+        echo "OUTPUT1=${OUTPUT1}" >> $GITHUB_ENV
     - name: Check output
       run: |
+        echo "The logs of writer ${{env.OUTPUT1 }}"
         if [[ "${{ env.OUTPUT }}" != "Hello World" ]]; then
         echo "The logs do not contain ${{env.OUTPUT }}"
         exit 1
