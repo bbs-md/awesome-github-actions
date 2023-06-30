@@ -30,6 +30,9 @@ jobs:
         sleep 30
         kubectl get pods
         kubectl describe pods
+        
+    - name: Get logs 2
+      run: |
         OUTPUT=$(curl http://127.0.0.1:8083)
         echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
     - name: Check output
