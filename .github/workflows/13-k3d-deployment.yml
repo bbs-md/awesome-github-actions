@@ -25,6 +25,11 @@ jobs:
     - name: Apply manifest
       run: |
         kubectl apply -f ./13-k3d-deployment/manifests
+        
+    - name: Add port 8085
+      run: |
+        k3d cluster edit demo-cluster-1 --port-add 8085:4567@loadbalancer
+        
     - name: Get logs
       run: |
         sleep 30
@@ -33,7 +38,7 @@ jobs:
         
     - name: Get logs 2
       run: |
-        OUTPUT=$(curl http://127.0.0.1:8083)
+        OUTPUT=$(curl http://127.0.0.1:8085)
         echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
     - name: Check output
       run: |
