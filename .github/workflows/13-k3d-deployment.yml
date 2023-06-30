@@ -32,7 +32,7 @@ jobs:
         
     - name: Get logs
       run: |
-        sleep 30
+        sleep 15
         kubectl get pods
         kubectl describe pods
         
