@@ -27,10 +27,10 @@ jobs:
         kubectl apply -f ./13-k3d-deployment/manifests
     - name: Get logs
       run: |
-        sleep 20
+        sleep 30
         kubectl get pods
         kubectl describe pods
-        OUTPUT=$(curl http://localhost:8083)
+        OUTPUT=$(curl http://127.0.0.1:8083)
         echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
     - name: Check output
       run: |
