@@ -15,6 +15,13 @@ spec:
     - name: reader-container
       image: ubuntu:23.10
       command: ["sh", "-c", "cat /data/test.txt"]
+      livenessProbe:
+        exec:
+          command:
+          - cat
+          - /data/test.txt
+        initialDelaySeconds: 5
+        periodSeconds: 5
       volumeMounts:
         - name: data
           mountPath: /data
