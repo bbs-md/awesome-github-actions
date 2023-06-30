@@ -1,0 +1,45 @@
+name: Deployment in k3d
+
+on:
+  push:
+    paths: 
+      - '13-k3d-deployment/**'
+      - '.github/workflows/13-k3d-deployment.yml'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Setup k3d
+      uses: rinx/setup-k3d@v0.0.3
+    - name: Create cluster
+      run: |
+        k3d cluster create demo-cluster --registry-create demo-registry:12345 --port 8083:4567@loadbalancer
+    - name: Apply manifest
+      run: |
+        kubectl apply -f ./13-k3d-deployment/manifests
+    - name: Get logs
+      run: |
+        sleep 10
+        kubectl get pods
+        kubectl describe pods
+        OUTPUT=$(curl http://localhost:8083)
+        echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
+    - name: Check output
+      run: |
+        echo "The logs of writer ${{env.OUTPUT }}"
+        if [[ "${{ env.OUTPUT }}" != "Hello World" ]]; then
+        echo "The logs do not contain ${{env.OUTPUT }}"
+        exit 1
+        fi
+    - name: Delete cluster and clean the system
+      run: |
+        k3d cluster delete demo-cluster
+        docker system prune -f -a
