@@ -36,6 +36,17 @@ jobs:
         kubectl get pods
         kubectl describe pods
         
+    - name: Set environment variables
+      run: |
+        echo "GITHUB_SERVER_HOST=localhost" >> $GITHUB_ENV
+        echo "GITHUB_SERVER_PORT=8085" >> $GITHUB_ENV
+    - name: Check connection with nginx in local docker
+      run: |
+        docker images
+        sleep 10
+        curl http://${{ env.GITHUB_SERVER_HOST }}:${{ env.GITHUB_SERVER_PORT }}
+        docker ps -a
+        
     - name: Get logs 2
       run: |
         OUTPUT=$(curl http://127.0.0.1:8085)
