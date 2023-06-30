@@ -35,6 +35,7 @@ jobs:
         sleep 15
         kubectl get pods
         kubectl describe pods
+        curl http://172.17.0.2:4567
         
     - name: Set environment variables
       run: |
