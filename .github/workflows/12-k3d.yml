@@ -3,6 +3,7 @@ name: Interconnect two contaienrs via volumes in k3d
 on:
   push:
     paths: 
+      - '12-k3d/**'
       - '.github/workflows/12-k3d.yml'
 
 jobs:
@@ -23,11 +24,20 @@ jobs:
         k3d cluster create demo-cluster --registry-create demo-registry:12345 
     - name: Apply manifest
       run: |
-        kubectl apply -f ./12-k3d/manifests
+        kubectl apply -f ./kubernetes/05-interconnect-two-containers-via-volumes-in-k3d/manifests
     - name: Get logs
       run: |
+        sleep 60
         kubectl get pods
-        kubectl logs 05-writer-reader
+        kubectl describe pods
+        OUTPUT=$(kubectl logs 05-writer-reader -c reader-container)
+        echo "OUTPUT=${OUTPUT}" >> $GITHUB_ENV
+    - name: Check output
+      run: |
+        if [[ "${{ env.OUTPUT }}" != "Hello World" ]]; then
+        echo "The logs do not contain ${{env.OUTPUT }}"
+        exit 1
+        fi
     - name: Delete cluster and clean the system
       run: |
         k3d cluster delete demo-cluster
