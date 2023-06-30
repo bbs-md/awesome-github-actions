@@ -1,0 +1,34 @@
+name: Interconnect two contaienrs via volumes in k3d
+
+on:
+  push:
+    paths: 
+      - '.github/workflows/12-k3d.yml'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Setup k3d
+      uses: rinx/setup-k3d@v0.0.3
+    - name: Create cluster
+      run: |
+        k3d cluster create demo-cluster --registry-create demo-registry:12345 
+    - name: Apply manifest
+      run: |
+        kubectl apply -f ./12-k3d/manifests
+    - name: Get logs
+      run: |
+        kubectl get pods
+        kubectl logs 05-writer-reader
+    - name: Delete cluster and clean the system
+      run: |
+        k3d cluster delete demo-cluster
+        docker system prune -f -a
