@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: deployment-with-4-pods
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: deployment-with-4-pods
