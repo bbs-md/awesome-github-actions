@@ -48,5 +48,5 @@ jobs:
         docker system prune -f -a
         
     - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3.11
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3.11
