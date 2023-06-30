@@ -3,7 +3,7 @@ name: Interconnect two contaienrs via volumes in k3d
 on:
   push:
     paths: 
-      - '.github/workflows/05-interconnect-two-containers-via-volumes-in-k3d.yml'
+      - '.github/workflows/12-k3d.yml'
 
 jobs:
   build:
