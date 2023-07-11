@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
+      - name: Print github.event.inputs
+        run: echo {{ github.event.inputs }}
+          
       - name: Print OS-release
         run: cat /etc/os-release
         
