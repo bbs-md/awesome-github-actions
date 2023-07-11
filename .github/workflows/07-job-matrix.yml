@@ -16,7 +16,7 @@ jobs:
         - os: ubuntu-22.04
           node: 12
 
-    runs-on: [ self-hosted, Linux ]  
+    runs-on: [ ubuntu ]  
     steps:
       - uses: actions/checkout@v2
       - name: Set up Node.js
