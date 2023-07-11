@@ -24,8 +24,12 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(github.event.inputs) }}
+          
       - name: Print github.event.inputs
-        run: echo {{ github.event.inputs }}
+        run: echo "$STEPS_CONTEXT"
           
       - name: Print OS-release
         run: cat /etc/os-release
