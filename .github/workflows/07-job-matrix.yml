@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
+      - name: Print work dir
+        run: echo '[$(pwd)]'
+          
       - name: Print repo name
         run: echo "repo name [${{ github.event.repository.name }}]"
             
