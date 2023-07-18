@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
+      - name: Print repo name
+        run: echo "repo name [${{ github.event.repository.name }}]"
+            
       - name: Print github.event.inputs
         env:
           STEPS_CONTEXT: ${{ toJson(github.event.inputs) }}
