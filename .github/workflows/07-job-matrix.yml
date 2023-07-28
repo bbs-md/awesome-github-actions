@@ -45,3 +45,14 @@ jobs:
       - name: Setup tmate session
         if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3.11
+
+      # Your steps to generate the output file or result
+      - name: Generate output file
+        run: echo "This is some output" > output.txt
+        
+      # Save the file as an artifact
+      - name: Save output as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: output.txt
